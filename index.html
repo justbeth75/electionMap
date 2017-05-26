@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .active { fill: blue !important;}
+        /*.datamaps-key dt, .datamaps-key dd {float: none !important;}
+        .datamaps-key {right: -50px; top: 0;}*/
+    </style>
+    
+   <title>Interactive Election of 1968</title>
+   <link rel="stylesheet" href="css/bootstrap.min.css">
+   <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+   <link href="css/map.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="map_election" style="width: 700px; height: 375px; position: relative;">  	<h2>Election of 1968</h2> 
+</div>
+
+
+<script src="./js/d3.min.js"></script>
+<script src="./js/topojson.js"></script>
+<script src="./js/datamaps.all.js"></script>
+<div id="additonalStyle" style="width: 70px; height: 0px; position: relative;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+ 
+     <!-- Diagonal Stripe pattern -->
+    <defs>
+        <pattern id="diagonal-stripe"
+                 patternTransform="rotate(45)"
+                 width="4" height="4"
+                 patternUnits="userSpaceOnUse">
+             <line x1="2" y1="0" x2="2" y2="4" stroke="#F58A4F" stroke-width="3" />
+        </pattern>
+    </defs>
+</svg>  
+</div>
+<script>
+
+var election = new Datamap({
+  scope: 'usa',
+  element: document.getElementById('map_election'),
+  geographyConfig: {
+    highlightBorderColor: '#FFFF00',
+    highlightFillColor: '#DDDDDD',
+   popupTemplate: function(geography, data) {
+      return '<div class="hoverinfo"><strong>' + geography.properties.name + '</strong><br>Electoral Votes: ' +  data.electoralVotes + ' '
+    },
+    highlightBorderWidth: 4
+  },
+
+  fills: {
+  'Independent': '#EEE09C',
+  'Republican': '#F58A4F',
+  'Democrat': '#9C89AD',
+  diagonalStripe: 'url(#diagonal-stripe)',
+  defaultFill: '#444444'
+},
+data:{
+  "AZ": {
+      "fillKey": "Republican",
+      "electoralVotes": 5
+  },
+  "CO": {
+      "fillKey": "Republican",
+      "electoralVotes": 6
+  },
+  "DC": {
+      "fillKey": "Democrat",
+      "electoralVotes": 3
+  },
+  "DE": {
+      "fillKey": "Republican",
+      "electoralVotes": 3
+  }, 
+  "FL": {
+      "fillKey": "Republican",
+      "electoralVotes": 14
+  },
+  "GA": {
+      "fillKey": "Independent",
+      "electoralVotes": 12
+  },
+  "HI": {
+      "fillKey": "Democrat",
+      "electoralVotes": 4
+  },
+  "ID": {
+      "fillKey": "Republican",
+      "electoralVotes": 4
+  },
+  "IL": {
+      "fillKey": "Republican",
+      "electoralVotes": 26
+  },
+  "IN": {
+      "fillKey": "Republican",
+      "electoralVotes": 13
+  },
+  "IA": {
+      "fillKey": "Republican",
+      "electoralVotes": 9
+  },
+  "KS": {
+      "fillKey": "Republican",
+      "electoralVotes": 7
+  },
+  "KY": {
+      "fillKey": "Republican",
+      "electoralVotes": 9
+  },
+  "LA": {
+      "fillKey": "Independent",
+      "electoralVotes": 10
+  },
+  "MD": {
+      "fillKey": "Democrat",
+      "electoralVotes": 10
+  },
+  "ME": {
+      "fillKey": "Democrat",
+      "electoralVotes": 4
+  },
+  "MA": {
+      "fillKey": "Democrat",
+      "electoralVotes": 14
+  },
+  "MN": {
+      "fillKey": "Democrat",
+      "electoralVotes": 10
+  },
+  "MI": {
+      "fillKey": "Democrat",
+      "electoralVotes": 21
+  },
+  "MS": {
+      "fillKey": "Independent",
+      "electoralVotes": 7
+  },
+  "MO": {
+      "fillKey": "Republican",
+      "electoralVotes": 12
+  },
+  "MT": {
+      "fillKey": "Republican",
+      "electoralVotes": 4
+  },
+  "NC": {
+      "fillKey": "diagonalStripe",
+      "electoralVotes":  "1 for Wallace, 12 for Nixon"
+  },
+  "NE": {
+      "fillKey": "Republican",
+      "electoralVotes": 5
+  },
+  "NV": {
+      "fillKey": "Republican",
+      "electoralVotes": 3
+  },
+  "NH": {
+      "fillKey": "Republican",
+      "electoralVotes": 4
+  },
+  "NJ": {
+      "fillKey": "Republican",
+      "electoralVotes": 17
+  },
+  "NY": {
+      "fillKey": "Democrat",
+      "electoralVotes": 43
+  },
+  "ND": {
+      "fillKey": "Republican",
+      "electoralVotes": 4
+  },
+  "NM": {
+      "fillKey": "Republican",
+      "electoralVotes": 4
+  },
+  "OH": {
+      "fillKey": "Republican",
+      "electoralVotes": 26
+  },
+  "OK": {
+      "fillKey": "Republican",
+      "electoralVotes": 8
+  },
+  "OR": {
+      "fillKey": "Republican",
+      "electoralVotes": 6
+  },
+  "PA": {
+      "fillKey": "Democrat",
+      "electoralVotes": 29
+  },
+  "RI": {
+      "fillKey": "Democrat",
+      "electoralVotes": 4
+  },
+  "SC": {
+      "fillKey": "Independent",
+      "electoralVotes": 8
+  },
+  "SD": {
+      "fillKey": "Republican",
+      "electoralVotes": 4
+  },
+  "TN": {
+      "fillKey": "Republican",
+      "electoralVotes": 11
+  },
+  "TX": {
+      "fillKey": "Democrat",
+      "electoralVotes": 25
+  },
+  "UT": {
+      "fillKey": "Republican",
+      "electoralVotes": 4
+  },
+  "WI": {
+      "fillKey": "Republican",
+      "electoralVotes": 12
+  },
+  "VA": {
+      "fillKey": "Republican",
+      "electoralVotes": 12
+  },
+  "VT": {
+      "fillKey": "Republican",
+      "electoralVotes": 3
+  },
+  "WA": {
+      "fillKey": "Democrat",
+      "electoralVotes": 9
+  },
+  "WV": {
+      "fillKey": "Democrat",
+      "electoralVotes": 7
+  },
+  "WY": {
+      "fillKey": "Republican",
+      "electoralVotes": 3
+  },
+  "CA": {
+      "fillKey": "Republican",
+      "electoralVotes": 40
+  },
+  "CT": {
+      "fillKey": "Democrat",
+      "electoralVotes": 8
+  },
+  "AK": {
+      "fillKey": "Republican",
+      "electoralVotes": 3
+  },
+  "AR": {
+      "fillKey": "Independent",
+      "electoralVotes": 6
+  },
+  "AL": {
+      "fillKey": "Independent",
+      "electoralVotes": 10
+  }
+}
+});
+election.labels();
+//draw a legend for this map
+//election.legend();
+</script>
+<div id="map_key" style="width: 700px; height: 100px; position: relative; margin-top: 10px; margin-left: 30px;">  
+<table width="331" border="2"style="background-color:white; padding:8px"><tr><th colspan="3" class="text-left">Candidate &#40;Party&#41;</th></tr>
+<tr><td width="32", bgcolor="#F58A4F">&nbsp;</td><td width="2">&nbsp;</td><td width="212">Richard M. Nixon &#40;Republican&#41;</td></tr>
+<tr><td bgcolor="#9C89AD">&nbsp;</td><td>&nbsp;</td><td>Hubert H. Humphrey &#40;Democratic&#41;</td></tr> 
+<tr><td bgcolor="#EEE09C">&nbsp;</td><td>&nbsp;</td><td>George C. Wallace &#40;American Independent&#41;</td></tr></table>
+</div>
+<footer>
+  <p>&copy; 2015 Mapping Specialists, Ltd.</p>
+</footer>
+</body>
+</html> 
